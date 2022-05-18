@@ -60,6 +60,7 @@ interface IPlayerState {
     instance: AnimationItem | null;
     seeker: number;
     playerState: PlayerState;
+    initialSegment: number[];
 }
 export declare class Player extends React.Component<IPlayerProps, IPlayerState> {
     static getDerivedStateFromProps(nextProps: any, prevState: any): Promise<{

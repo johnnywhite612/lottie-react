@@ -89,6 +89,7 @@ interface IPlayerState {
   instance: AnimationItem | null;
   seeker: number;
   playerState: PlayerState;
+  initialSegment: number[];
 }
 
 // Build default config for lottie-web player
@@ -124,7 +125,6 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       instance: null,
       playerState: PlayerState.Loading,
       seeker: 0,
-      initialSegment: initialSegment,
     };
   }
 
@@ -206,7 +206,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
   public render() {
     const { children, loop, style, onBackgroundChange, className, initialSegment } = this.props;
-    const { animationData, instance, playerState, seeker, debug, background, initialSegment } = this.state;
+    const { animationData, instance, playerState, seeker, debug, background } = this.state;
 
     return (
       <div className="lf-player-container">
