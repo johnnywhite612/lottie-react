@@ -313,7 +313,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment: [24, 25],
+        // initialSegment: [24, 25],
       });
       if (speed) {
         newInstance.setSpeed(speed);
