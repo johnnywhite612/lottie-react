@@ -74,7 +74,7 @@ export interface IPlayerProps {
   renderer?: any;
   speed?: number;
   src: object | string;
-  initialSegment: number[];
+  initialSegment?: number[];
   style?: React.CSSProperties;
   rendererSettings?: object;
   keepLastFrame?: boolean;
@@ -204,7 +204,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
   };
 
   public render() {
-    const { children, loop, style, onBackgroundChange, className, initialSegment } = this.props;
+    const { children, loop, style, onBackgroundChange, className } = this.props; //initialSegment
     const { animationData, instance, playerState, seeker, debug, background } = this.state;
 
     return (
