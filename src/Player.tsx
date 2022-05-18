@@ -124,6 +124,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       instance: null,
       playerState: PlayerState.Loading,
       seeker: 0,
+      initialSegment: [24, 25],
     };
   }
 
@@ -205,7 +206,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
   public render() {
     const { children, loop, style, onBackgroundChange, className, initialFrame } = this.props;
-    const { animationData, instance, playerState, seeker, debug, background } = this.state;
+    const { animationData, instance, playerState, seeker, debug, background, initialSegment } = this.state;
 
     return (
       <div className="lf-player-container">
@@ -241,7 +242,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              initialSegment: [initialFrame, initialFrame + 1],
+              initialSegment: [24, 25],
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
@@ -314,6 +315,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
+        initialSegment: [24, 25],
       });
       if (speed) {
         newInstance.setSpeed(speed);
@@ -396,7 +398,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         }
       });
 
-      newInstance.currentRawFrame = initialFrame ? initialFrame : 1;
+      // newInstance.currentRawFrame = initialFrame ? initialFrame : 1;
     } catch (e) {
       this.setState({ playerState: PlayerState.Error });
     }
