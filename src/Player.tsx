@@ -282,9 +282,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       src,
       background,
       rendererSettings,
-      initialSegment,
       hover,
-    } = this.props;
+    } = this.props; //initialSegment,
     const { instance } = this.state;
 
     if (!src || !this.container) {
