@@ -453,7 +453,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     const { instance, playerState } = this.state;
 
     if (instance) {
-      if (!play || playerState !== PlayerState.Playing) {
+      if (!play) {
         instance.goToAndStop(seek, true);
         this.triggerEvent(PlayerEvent.Pause);
         this.setState({ playerState: PlayerState.Paused });
