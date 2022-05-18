@@ -74,6 +74,7 @@ export interface IPlayerProps {
   renderer?: any;
   speed?: number;
   src: object | string;
+  initialFrame: number;
   style?: React.CSSProperties;
   rendererSettings?: object;
   keepLastFrame?: boolean;
@@ -280,6 +281,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       src,
       background,
       rendererSettings,
+      initialFrame,
       hover,
     } = this.props;
     const { instance } = this.state;
@@ -312,6 +314,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         loop: loop || false,
         renderer,
       });
+      newInstance.currentRawFrame = 24;
       if (speed) {
         newInstance.setSpeed(speed);
       }
