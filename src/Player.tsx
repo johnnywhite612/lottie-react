@@ -74,7 +74,7 @@ export interface IPlayerProps {
   renderer?: any;
   speed?: number;
   src: object | string;
-  initialFrame: number;
+  initialSegment: number[];
   style?: React.CSSProperties;
   rendererSettings?: object;
   keepLastFrame?: boolean;
@@ -124,7 +124,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       instance: null,
       playerState: PlayerState.Loading,
       seeker: 0,
-      initialSegment: [24, 25],
+      initialSegment: initialSegment,
     };
   }
 
@@ -205,7 +205,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
   };
 
   public render() {
-    const { children, loop, style, onBackgroundChange, className, initialFrame } = this.props;
+    const { children, loop, style, onBackgroundChange, className, initialSegment } = this.props;
     const { animationData, instance, playerState, seeker, debug, background, initialSegment } = this.state;
 
     return (
@@ -242,7 +242,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              initialSegment: [24, 25],
+              initialSegment: initialSegment,
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
@@ -283,7 +283,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       src,
       background,
       rendererSettings,
-      initialFrame,
+      initialSegment,
       hover,
     } = this.props;
     const { instance } = this.state;
@@ -315,7 +315,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment: [24, 25],
+        initialSegment: initialSegment,
       });
       if (speed) {
         newInstance.setSpeed(speed);

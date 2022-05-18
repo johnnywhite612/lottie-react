@@ -46,7 +46,7 @@ export interface IPlayerProps {
     renderer?: any;
     speed?: number;
     src: object | string;
-    initialFrame: number;
+    initialSegment: number[];
     style?: React.CSSProperties;
     rendererSettings?: object;
     keepLastFrame?: boolean;
