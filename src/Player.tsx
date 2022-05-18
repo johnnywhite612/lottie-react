@@ -450,7 +450,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
   }
 
   public setSeeker(seek: number, play = false) {
-    const { instance, playerState } = this.state;
+    const { instance } = this.state;
 
     if (instance) {
       if (!play) {
