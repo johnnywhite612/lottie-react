@@ -241,7 +241,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              initialSegment: [24, 25],
+              // initialSegment: [24, 25],
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
