@@ -89,7 +89,6 @@ interface IPlayerState {
   instance: AnimationItem | null;
   seeker: number;
   playerState: PlayerState;
-  initialSegment: number[];
 }
 
 // Build default config for lottie-web player
