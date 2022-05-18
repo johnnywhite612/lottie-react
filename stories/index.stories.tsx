@@ -28,7 +28,7 @@ export const LottiePlayer = () => {
         onEvent={onEvent}
         className="test"
         keepLastFrame={true}
-        initialSegment={[24, 25]}
+        // initialSegment={[24, 25]}
       >
         <Controls
           transparentTheme={true}
