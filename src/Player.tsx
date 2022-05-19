@@ -329,7 +329,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
       if (showPosterFrame) {
         newInstance.currentRawFrame = posterFrame;
-        newInstance.setSegment(posterFrame, posterFrame + 1);
+        newInstance.goToAndStop(posterFrame);
+        // newInstance.setSegment(posterFrame, posterFrame + 1);
       }
       // newInstance.setSegment(initialSegment[0], initialSegment[1]);
 
