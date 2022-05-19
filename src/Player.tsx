@@ -332,8 +332,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         this.triggerEvent(PlayerEvent.Ready);
         // if (showPosterFrame) {
         newInstance.currentRawFrame = posterFrame ? posterFrame : 24;
-        newInstance.goToAndStop(posterFrame);
-        // newInstance.setSegment(posterFrame, posterFrame + 1);
+        // newInstance.goToAndStop(posterFrame);
+        newInstance.setSegment(posterFrame, posterFrame + 1);
         // }
       });
 
