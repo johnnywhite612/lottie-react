@@ -398,7 +398,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         }
       });
 
-      // newInstance.currentRawFrame = initialFrame ? initialFrame : 1;
+      newInstance.currentRawFrame = 24;
     } catch (e) {
       this.setState({ playerState: PlayerState.Error });
     }
