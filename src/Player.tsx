@@ -241,7 +241,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              initialSegment: initialSegment,
+              initialSegment: [24, 25],
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
@@ -314,7 +314,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment: initialSegment,
+        initialSegment: [24, 25],
       });
       if (speed) {
         newInstance.setSpeed(speed);
