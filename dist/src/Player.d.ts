@@ -46,7 +46,7 @@ export interface IPlayerProps {
     renderer?: any;
     speed?: number;
     src: object | string;
-    initialSegment?: number[];
+    initialSegmentSrc?: number[];
     style?: React.CSSProperties;
     rendererSettings?: object;
     keepLastFrame?: boolean;
@@ -54,6 +54,7 @@ export interface IPlayerProps {
 }
 interface IPlayerState {
     animationData: any;
+    initialSegment: number[];
     background: string;
     containerRef: React.Ref<HTMLDivElement> | null;
     debug?: boolean;

@@ -74,7 +74,7 @@ export interface IPlayerProps {
   renderer?: any;
   speed?: number;
   src: object | string;
-  initialSegment?: number[];
+  initialSegmentSrc?: number[];
   style?: React.CSSProperties;
   rendererSettings?: object;
   keepLastFrame?: boolean;
@@ -83,6 +83,7 @@ export interface IPlayerProps {
 
 interface IPlayerState {
   animationData: any;
+  initialSegment: number[];
   background: string;
   containerRef: React.Ref<HTMLDivElement> | null;
   debug?: boolean;
@@ -118,6 +119,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     }
     this.state = {
       animationData: null,
+      initialSegment: [0, 1],
       background: 'transparent',
       containerRef: React.createRef(),
       debug: true,
@@ -204,8 +206,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
   };
 
   public render() {
-    const { children, loop, style, onBackgroundChange, className, initialSegment } = this.props; //initialSegment
-    const { animationData, instance, playerState, seeker, debug, background } = this.state;
+    const { children, loop, style, onBackgroundChange, className } = this.props; //initialSegment
+    const { animationData, instance, playerState, seeker, debug, background, initialSegment } = this.state;
 
     return (
       <div className="lf-player-container">
@@ -242,7 +244,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              segmentObj,
+              // segmentObj,
+              initialSegment,
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
@@ -284,7 +287,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       background,
       rendererSettings,
       hover,
-      initialSegment,
+      initialSegmentSrc,
     } = this.props; //initialSegment,
     const { instance } = this.state;
 
@@ -296,7 +299,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     try {
       // Parse the src to see if it is a URL or Lottie JSON data
       let animationData = parseSrc(src);
-
+      let initialSegment = initialSegmentSrc;
       if (typeof animationData === 'string') {
         const fetchResult = await fetch(animationData as string);
         animationData = await fetchResult.json();
@@ -315,12 +318,13 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment: initialSegment,
+        initialSegment,
       });
       if (speed) {
         newInstance.setSpeed(speed);
       }
       this.setState({ animationData });
+      this.setState({ initialSegment });
 
       newInstance.currentRawFrame = initialSegment[0];
       newInstance.setSegment(initialSegment[0], initialSegment[1]);
