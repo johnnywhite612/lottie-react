@@ -327,7 +327,10 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         newInstance.setSpeed(speed);
       }
 
-      if (showPosterFrame) newInstance.currentRawFrame = posterFrame;
+      if (showPosterFrame) {
+        newInstance.currentRawFrame = posterFrame;
+        newInstance.setSegment(posterFrame, posterFrame + 1);
+      }
       // newInstance.setSegment(initialSegment[0], initialSegment[1]);
 
       // Handle new frame event
