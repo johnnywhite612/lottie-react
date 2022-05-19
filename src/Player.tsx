@@ -230,6 +230,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
           ></div>
         )}
         {React.Children.map(children, child => {
+          let segmentObj = { initialSegment: [24, 25] };
           if (React.isValidElement(child)) {
             return React.cloneElement(child, {
               animationData,
@@ -241,7 +242,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               play: () => this.play(),
               playerState,
               seeker,
-              initialSegment: [24, 25],
+              segmentObj,
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
