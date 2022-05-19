@@ -322,6 +322,9 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       }
       this.setState({ animationData });
 
+      newInstance.currentRawFrame = 24;
+      newInstance.setSegment(24, 25);
+
       // Handle new frame event
       newInstance.addEventListener('enterFrame', () => {
         this.triggerEvent(PlayerEvent.Frame);
@@ -397,8 +400,6 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
           this.play();
         }
       });
-
-      newInstance.currentRawFrame = 24;
     } catch (e) {
       this.setState({ playerState: PlayerState.Error });
     }
