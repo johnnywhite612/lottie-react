@@ -74,7 +74,8 @@ export interface IPlayerProps {
   renderer?: any;
   speed?: number;
   src: object | string;
-  initialSegmentSrc?: number[];
+  posterFrame?: number;
+  showPosterFrame?: boolean;
   style?: React.CSSProperties;
   rendererSettings?: object;
   keepLastFrame?: boolean;
@@ -83,7 +84,8 @@ export interface IPlayerProps {
 
 interface IPlayerState {
   animationData: any;
-  initialSegment: number[];
+  posterFrame?: number;
+  showPosterFrame?: boolean;
   background: string;
   containerRef: React.Ref<HTMLDivElement> | null;
   debug?: boolean;
@@ -119,7 +121,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     }
     this.state = {
       animationData: null,
-      initialSegment: [0, 1],
+      posterFrame: 0,
+      showPosterFrame: true,
       background: 'transparent',
       containerRef: React.createRef(),
       debug: true,
@@ -207,7 +210,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
   public render() {
     const { children, loop, style, onBackgroundChange, className } = this.props; //initialSegment
-    const { animationData, instance, playerState, seeker, debug, background, initialSegment } = this.state;
+    const { animationData, instance, playerState, seeker, debug, background } = this.state;
 
     return (
       <div className="lf-player-container">
@@ -232,7 +235,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
           ></div>
         )}
         {React.Children.map(children, child => {
-          let segmentObj = { initialSegment: initialSegment };
+          // let segmentObj = { initialSegment: initialSegment };
           if (React.isValidElement(child)) {
             return React.cloneElement(child, {
               animationData,
@@ -245,7 +248,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
               playerState,
               seeker,
               // segmentObj,
-              initialSegment,
+              // initialSegment,
               setBackground: (value: string) => {
                 this.setState({ background: value });
 
@@ -287,7 +290,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
       background,
       rendererSettings,
       hover,
-      initialSegmentSrc,
+      posterFrame,
+      showPosterFrame,
     } = this.props; //initialSegment,
     const { instance } = this.state;
 
@@ -299,7 +303,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     try {
       // Parse the src to see if it is a URL or Lottie JSON data
       let animationData = parseSrc(src);
-      let initialSegment = initialSegmentSrc;
+      // let initialSegment = initialSegmentSrc;
       if (typeof animationData === 'string') {
         const fetchResult = await fetch(animationData as string);
         animationData = await fetchResult.json();
@@ -318,16 +322,13 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment,
       });
       if (speed) {
         newInstance.setSpeed(speed);
       }
-      this.setState({ animationData });
-      this.setState({ initialSegment: initialSegment });
 
-      newInstance.currentRawFrame = initialSegment[0];
-      newInstance.setSegment(initialSegment[0], initialSegment[1]);
+      if (showPosterFrame) newInstance.currentRawFrame = posterFrame;
+      // newInstance.setSegment(initialSegment[0], initialSegment[1]);
 
       // Handle new frame event
       newInstance.addEventListener('enterFrame', () => {
