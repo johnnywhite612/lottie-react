@@ -230,7 +230,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
           ></div>
         )}
         {React.Children.map(children, child => {
-          let segmentObj = { initialSegment: [24, 25] };
+          let segmentObj = { initialSegment: initialSegment };
           if (React.isValidElement(child)) {
             return React.cloneElement(child, {
               animationData,
@@ -315,15 +315,15 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         container: this.container as Element,
         loop: loop || false,
         renderer,
-        initialSegment: [24, 25],
+        initialSegment: initialSegment,
       });
       if (speed) {
         newInstance.setSpeed(speed);
       }
       this.setState({ animationData });
 
-      newInstance.currentRawFrame = 24;
-      newInstance.setSegment(24, 25);
+      newInstance.currentRawFrame = initialSegment[0];
+      newInstance.setSegment(initialSegment[0], initialSegment[1]);
 
       // Handle new frame event
       newInstance.addEventListener('enterFrame', () => {
