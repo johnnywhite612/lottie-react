@@ -324,7 +324,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         newInstance.setSpeed(speed);
       }
       this.setState({ animationData });
-      this.setState({ initialSegment });
+      this.setState({ initialSegment: initialSegment });
 
       newInstance.currentRawFrame = initialSegment[0];
       newInstance.setSegment(initialSegment[0], initialSegment[1]);
