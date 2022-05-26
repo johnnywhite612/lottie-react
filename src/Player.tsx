@@ -148,6 +148,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
   public async componentDidUpdate(prevProps: any) {
     if (this.props.src !== prevProps.src) {
+      alert('Destroying lottie');
       if (this.state.instance) {
         this.state.instance.destroy();
       }
@@ -173,7 +174,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
     const id = this.props.id ? this.props.id : 'lottie';
     const lottieElement = document.getElementById(id);
     if (this.props.renderer == 'svg') {
-      console.log('Rendering as svg')
+      console.log('Rendering as svg');
 
       // Get SVG element and serialize markup
       if (lottieElement) {
@@ -191,7 +192,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         this.triggerDownload(data, `snapshot.svg`);
       }
     } else if (this.props.renderer == 'canvas') {
-      console.log('Rendering as canvas')
+      console.log('Rendering as canvas');
       if (lottieElement) {
         const canvas = lottieElement.querySelector('canvas');
         if (canvas) {
@@ -203,9 +204,8 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
         // this.triggerDownload(data, `snapshot_${progress}.png`);
         this.triggerDownload(data, `snapshot.png`);
       }
-    }else{
-      console.log('Not rendering at all!')
-
+    } else {
+      console.log('Not rendering at all!');
     }
 
     return data;
