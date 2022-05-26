@@ -142,14 +142,15 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
   public componentWillUnmount() {
     this.unmounted = true;
     if (this.state.instance) {
+      this.state.instance.stop();
       this.state.instance.destroy();
     }
   }
 
   public async componentDidUpdate(prevProps: any) {
     if (this.props.src !== prevProps.src) {
-      alert('Destroying lottie');
       if (this.state.instance) {
+        this.state.instance.stop();
         this.state.instance.destroy();
       }
       await this.createLottie();
@@ -313,6 +314,7 @@ export class Player extends React.Component<IPlayerProps, IPlayerState> {
 
       // Clear previous animation, if any
       if (instance) {
+        instance.stop();
         instance.destroy();
       }
 
